@@ -314,45 +314,71 @@
                     <TextBlock Text="{Binding StringFormat='Filters: {0}', Path=Filter}" Foreground="#bebfc1" FontSize="14"/>
                     <ComboBox SelectedItem="{Binding Filter}" ItemsSource="{Binding Filters}" Width="120" BorderBrush="#46515a" Foreground="#46515a" HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 </DockPanel>
-                <DataGrid x:Name="DataInProcessActivityGrid" ItemsSource="{Binding Activities}" IsSynchronizedWithCurrentItem="True" Width="Auto" Background="#2c343a"  HorizontalAlignment="Stretch" Height="700" Margin="0 160 50 20" VerticalAlignment="Top" CanUserDeleteRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserAddRows="False" CanUserReorderColumns="False" AutoGenerateColumns="False" SelectionMode="Single">
-                    <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}" TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Foreground" Value="#ffffff" />
-                            <Style.Triggers>
-                                <Trigger Property="Focusable" Value="True">
-                                    <Setter Property="Foreground" Value="#ffffff" />
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                        <Style TargetType="{x:Type DataGridCell}">
-                            <Setter Property="Height" Value="35"/>
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="Padding" Value="10 5 0 0"/>
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="{x:Type DataGridCell}">
-                                        <Border Padding="{TemplateBinding Padding}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
-                                            <ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-                                        </Border>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="DataGridCell.IsSelected" Value="True">
-                                    <Setter Property="Background" Value="#374148" />
-                                    <Setter Property="Foreground" Value="#5f6469" />
-                                    <Setter Property="BorderBrush" Value="#374148"/>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </DataGrid.Resources>
-                    <DataGrid.Columns>
-                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path = ActivitieType }" Foreground="#c6c7c9" Header="Activitie type" Width="25*"/>
-                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path = DateEvent }"  Foreground="#c6c7c9" Header="Date" Width="15*"/>
-                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path = ExecutableEmployee }"  Foreground="#c6c7c9" Header="Executable employee" Width="20*"/>
-                        <DataGridTextColumn IsReadOnly="True" Binding="{Binding Path = Cost }" Header="Cost" Foreground="#c6c7c9"  Width="10*"/>
-                    </DataGrid.Columns>
-                </DataGrid>
+                <ScrollViewer Width="Auto" Padding="0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Height="450" Margin="0 160 50 20" VerticalAlignment="Top">
+                    <StackPanel Margin="20 0">
+                        <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Tasks}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Margin="0 15 20 20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="400" Background="#2c343a">
+                                        <Grid VerticalAlignment="Top" Height="100"  Margin="20 0 20 0">
+                                            <Grid Height="80" Width="80" Background="#304394" VerticalAlignment="Top" HorizontalAlignment="Left">
+                                                <materialDisign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="StateMachine" Foreground="#fff" Height="45" Width="45"/>
+                                            </Grid>
+                                            <Grid Height="75" Width="200" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="100" VerticalAlignment="Center">
+                                                    <Label Content="38" FontSize="28" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
+                                                    <Label Content="Employeess" FontSize="13" Foreground="#73777b" HorizontalContentAlignment="Center"/>
+                                                </StackPanel>
+                                                <DockPanel HorizontalAlignment="Left" Width="100" VerticalAlignment="Center">
+                                                    <Label DockPanel.Dock="Top" Content="In process" FontSize="20" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
+                                                    <Label DockPanel.Dock="Bottom" Content="status" FontSize="13" Foreground="#73777b" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                                </DockPanel>
+                                            </Grid>
+                                        </Grid>
+                                        <StackPanel VerticalAlignment="Top" Margin="0 130">
+                                            <TextBlock Margin="20 0 0 5" Text="Tesla motors" FontSize="15" Foreground="#a7b3bf"/>
+                                            <TextBlock Margin="20 0" 
+                            Text="Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+                                   "
+                                   FontSize="13" Foreground="#d6d7da" TextWrapping="Wrap"/>
+                                        </StackPanel>
+                                        <Grid Width="310" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="70" Margin="20 0 0 20">
+                                            <Border VerticalAlignment="top" BorderBrush="#4d545c" BorderThickness="0 0 0 1"  Margin="0 0 0 20"/>
+                                            <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal">
+                                                <Image  Source="C:\Users\User\Desktop\Proects\icon4.png" Width="50" Height="50"/>
+                                                <StackPanel Margin="10 0 0 0" >
+                                                    <TextBlock Text="Programmer" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
+                                                    <TextBlock  Text="Александра Энистон" Foreground="#f9fafa" VerticalAlignment="Top" FontSize="16"/>
+                                                    <!--<TextBlock.Text>
+                                            <MultiBinding StringFormat="{}{0} {1}">
+                                                <Binding Path="FirstName"/>
+                                                <Binding Path="LastName"/>
+                                            </MultiBinding>
+                                        </TextBlock.Text>
+                                    </TextBlock>-->
+                                                </StackPanel>
+
+                                            </StackPanel>
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ContextMenu>
+                                <ContextMenu Background="#22272b" Foreground="#c9d5df">
+                                    <MenuItem Click="OpenDetailsEmployeeWindow" Header="Details"></MenuItem>
+                                    <MenuItem Click="OpenEditingEmployeeWindow" Header="Edit"></MenuItem>
+                                    <MenuItem Click="OpeneDeleteEmployeeWindow" Header="Delete"></MenuItem>
+                                </ContextMenu>
+                            </ItemsControl.ContextMenu>
+                        </ItemsControl>
+                    </StackPanel>
+                </ScrollViewer>
+                              
             </Grid>
             <Grid x:Name="GridMenu" Width="80" Background="#16191c" HorizontalAlignment="Left">
                 <StackPanel>
@@ -381,30 +407,6 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDisign:PackIcon Kind="Post" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
                                 <TextBlock Text="Add position" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="EditActivityButton" Height="60" Foreground="#adafb0">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDisign:PackIcon Kind="Edit" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
-                                <TextBlock Text="Edit" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="DetailsActivitieButton" Height="60" Foreground="#adafb0">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDisign:PackIcon Kind="Details" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
-                                <TextBlock Text="Details" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="AddEventType" Height="60" Foreground="#adafb0">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDisign:PackIcon Kind="AddBox" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
-                                <TextBlock Text="Add event type" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="DeleteActivityButton" Height="60" Foreground="#adafb0">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDisign:PackIcon Kind="Delete" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
-                                <TextBlock Text="Delete" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>

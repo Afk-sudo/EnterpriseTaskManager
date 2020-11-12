@@ -27,6 +27,7 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
         }
         public BindingList<Employee> OfficeWorkers { get; set; }
         public BindingList<Employee> RemoteWorkers { get; set; }
+        public BindingList<Task> Tasks { get; set; }
         public List<string> Filters { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public MainViewModel()
@@ -34,6 +35,7 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
             Filter = "None";
             Filters = new List<string>() { "None", "By date" };
             LoadWorkers();
+            LoadTasks();
         }
         public void AddEmployeeInViewModel(Employee employee)
         {
@@ -54,6 +56,16 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
                     OfficeWorkers.Add(employee);
                 else
                     RemoteWorkers.Add(employee);
+            }
+        }
+        private void LoadTasks()
+        {
+            Tasks = new BindingList<Task>();
+
+            var tasks = App.Database.Tasks.Include(task => task.TaskStatus).Include(task => task.TaskCategory);
+            foreach(Task task in tasks)
+            {
+                Tasks.Add(task);
             }
         }
         public void OnPropertyChanged(string propertyName)
