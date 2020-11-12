@@ -1,4 +1,5 @@
 ﻿using EnterpriseTaskManager.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -98,7 +99,7 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
             foreach (var taskCategory in tasksCategoryes)
                 TasksCategoryes.Add(taskCategory);
 
-            var employees = App.Database.Employees;
+            var employees = App.Database.Employees.Include(e => e.TaskEmployee);
             foreach (var employee in employees)
                 Employees.Add(employee);
 

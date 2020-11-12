@@ -115,7 +115,7 @@
             </Grid>
         </DataTemplate>
         <DataTemplate DataType="{x:Type modalWindow:AddEmployeeViewModel}">
-            <Grid Height="550" Width="800" Background="#22272b">
+            <Grid Height="650" Width="800" Background="#22272b">
                 <Grid VerticalAlignment="Top" Background="#16191c">
                     <TextBlock Text="{Binding WindowName}" Foreground="#adafb0" Margin="20" FontSize="18"  HorizontalAlignment="Left" />
                     <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
@@ -173,7 +173,17 @@
                                 </StackPanel>
                             </StackPanel>
                         </DockPanel>
-                        <Button Content="Add" Command="{Binding AddEmployeeCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 410 50 0" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+                        <DockPanel  HorizontalAlignment="Center" Width="700" Margin="0 400 0 0 ">
+                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Left" >
+                                <TextBlock Foreground="#aeafb4" Text="Login *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding Login}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Left"  Margin="50 0 0 0">
+                                <TextBlock Foreground="#aeafb4" Text="Password *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding Password}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <Button Content="Add" Command="{Binding AddEmployeeCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 510 50 0" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
                     </Grid>
                 </Grid>
             </Grid>
@@ -500,7 +510,7 @@
                                         <Grid Width="310" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="70" Margin="20 0 0 20">
                                             <Border VerticalAlignment="top" BorderBrush="#4d545c" BorderThickness="0 0 0 1"  Margin="0 0 0 20"/>
                                             <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal">
-                                                <Image  Source="{Binding CheifEmployee.PathToPhoto}" Width="50" Height="50"/>
+                                                <Image  Source="{Binding CheifEmployee.PathToPhoto}"  Width="50" Height="50"/>
                                                 <StackPanel Margin="10 0 0 0" >
                                                     <TextBlock Text="{Binding CheifEmployee.Position}" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
                                                     <TextBlock  Text="{Binding CheifEmployee.FullName}" Foreground="#f9fafa" VerticalAlignment="Top" FontSize="16"/>

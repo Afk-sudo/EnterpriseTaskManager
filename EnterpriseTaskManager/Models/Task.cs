@@ -1,12 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace EnterpriseTaskManager.Models
 {
     public class Task : INotifyPropertyChanged
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string TaskName 
         {
@@ -70,8 +74,10 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private Employee _cheifEmployee;
+        public List<TaskEmployee> TaskEmployee { get; set; } 
         public Task() 
         {
+            TaskEmployee = new List<TaskEmployee>();
         }
         public Task(string taskName, string description, TaskStatus taskStatus, TaskCategory taskCategory, Employee cheifEmployee)
         {
@@ -80,6 +86,7 @@ namespace EnterpriseTaskManager.Models
             TaskStatus = taskStatus;
             TaskCategory = taskCategory;
             CheifEmployee = cheifEmployee;
+            TaskEmployee = new List<TaskEmployee>();
         }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)

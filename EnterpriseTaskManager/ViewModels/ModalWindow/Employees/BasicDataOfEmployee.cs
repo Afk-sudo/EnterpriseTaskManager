@@ -171,6 +171,30 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
             }
         }
         private bool _isFemale;
+        public string Login
+        {
+            get => _login;
+            set
+            {
+                if (_login == value)
+                    return;
+                _login = value;
+                OnPropertyChanged("Password");
+            }
+        }
+        private string _login;
+        public string Password
+        {
+            get => _password;
+            set
+            {
+                if (_password == value)
+                    return;
+                _password = value;
+                OnPropertyChanged("Password");
+            }
+        }
+        private string _password;
         public List<Position> Positions { get; private set; }
         public CustomCommand OpenFileDialogCommand => new CustomCommand(OpenFileDialog);
         public BasicDataOfEmployee()
@@ -185,6 +209,10 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
                 throw new Exception("Last name cannot be empty");
             if (string.IsNullOrEmpty(Patronymic))
                 throw new Exception("Patronymic cannot be empty");
+            if (string.IsNullOrEmpty(Login))
+                throw new Exception("Login cannot be empty");
+            if (string.IsNullOrEmpty(Password))
+                throw new Exception("Password cannot be empty");
             if (DateBirth == null)
                 throw new Exception("DateBirth cannot be empty");
             if (Position == null)

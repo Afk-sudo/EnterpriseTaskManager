@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EnterpriseTaskManager.Models
 {
     public class Employee : INotifyPropertyChanged
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string FirstName
         {
@@ -129,12 +133,13 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private string _gender;
-        
+        public List<TaskEmployee> TaskEmployee { get; set; }
         public event PropertyChangedEventHandler PropertyChanged;
         public Employee()
         {
+            TaskEmployee = new List<TaskEmployee>();
         }
-        public Employee(string firstName, string lastName, string patronymic, DateTime dateBirth, string pathToPhoto, Position position, string typeWorkerByLocation, string gender)
+        public Employee(string firstName, string lastName, string patronymic, DateTime dateBirth, string pathToPhoto, Position position, string typeWorkerByLocation, string gender, string login, string password )
         {
             FirstName = firstName;
             LastName = lastName;
@@ -144,6 +149,9 @@ namespace EnterpriseTaskManager.Models
             Position = position;
             TypeWorkerByLocation = typeWorkerByLocation;
             Gender = gender;
+            Login = login;
+            Password = password;
+            TaskEmployee = new List<TaskEmployee>();
         }
         private void OnPropertyChanged(string propertyName)
         {

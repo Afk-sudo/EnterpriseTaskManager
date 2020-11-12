@@ -17,7 +17,7 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
             try
             {
                 ValidateData();
-                Employee employee = new Employee(FirstName, LastName, Patronymic, DateBirth, PathToPhoto, Position, TypeWorkerByLocation, Gender);
+                Employee employee = new Employee(FirstName, LastName, Patronymic, DateBirth, PathToPhoto, Position, TypeWorkerByLocation, Gender, Login, Password);
                 App.Database.Employees.Add(employee);
                 App.Database.SaveChanges();
                 OnAddingEmployee(employee);
