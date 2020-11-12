@@ -21,10 +21,15 @@ namespace EnterpriseTaskManager.Models
         }
         private string _positionName;
         public event PropertyChangedEventHandler PropertyChanged;
+        public Position() { }
+        public Position(string positionName)
+        {
+            PositionName = positionName;
+        }
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
+        public override string ToString() => PositionName;
     }
 }

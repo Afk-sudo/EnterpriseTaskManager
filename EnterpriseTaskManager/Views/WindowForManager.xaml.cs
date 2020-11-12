@@ -1,26 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using EnterpriseTaskManager.ViewModels.ModalWindow;
+using MaterialDesignThemes.Wpf;
+using System;
+using EnterpriseTaskManager.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using EnterpriseTaskManager.ViewModels.ModalWindow;
 
 namespace EnterpriseTaskManager.Views
 {
     public partial class WindowForManager : Window
     {
+        private bool _isOfficeWorkerListVisibly = true;
+        private bool _isInProcessActivitieListVisible = true;
+        private bool _isCanInteractableWithDataGrid = false;
         public WindowForManager()
         {
             InitializeComponent();
         }
         private void OnWindowLoaded(object sender, EventArgs eventArgs)
         {
-
+            this.DataContext = App.MainViewModel;
+            AddPositionButton.MouseLeftButtonUp += OpenModalWindowAdditingPosition;
+            AddEmployeeButton.MouseLeftButtonUp += OpenModalWindowAdditingEmployee;
+        }
+        private void OpenModalWindowAdditingPosition(object sender, MouseButtonEventArgs e)
+        {
+            AddPositionViewModel addPositionViewModel = new AddPositionViewModel();
+            addPositionViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            addPositionViewModel.ExcitationException += DisplayExceptionMessage;
+            DialogHost.Show(addPositionViewModel, "RootDialog");            
+        }
+        private void OpenModalWindowAdditingEmployee(object sender, MouseButtonEventArgs eventArgs)
+        {
+            AddEmployeeViewModel addEmployeeViewModel = new AddEmployeeViewModel();
+            addEmployeeViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            addEmployeeViewModel.ExcitationException += DisplayExceptionMessage;
+            addEmployeeViewModel.AddingEmployee += AddEmployee;
+            DialogHost.Show(addEmployeeViewModel, "RootDialog");
+        }
+        private void AddEmployee(Employee employee)
+        {
+            App.MainViewModel.AddEmployeeInViewModel(employee);
+        }
+        private void CloseAllModalWindows()
+        {
+            DialogHost.CloseDialogCommand.Execute(null, null);
+        }
+        private void DisplayExceptionMessage(string exceptionMessage)
+        {
+            MessageBox.Show(exceptionMessage);
         }
         private void OnClickOpenGridMenu(object sender, RoutedEventArgs eventArgs)
         {
@@ -36,7 +65,7 @@ namespace EnterpriseTaskManager.Views
         {
             OfficeWorkerList.Visibility = Visibility.Visible;
             RemoteWorkersList.Visibility = Visibility.Collapsed;
-            //_isOfficeWorkerListVisibly = true;
+            _isOfficeWorkerListVisibly = true;
             OfficeWorkerButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#d6d7da"));
             RemoteWorekerButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#586875"));
         }
@@ -44,9 +73,68 @@ namespace EnterpriseTaskManager.Views
         {
             RemoteWorkersList.Visibility = Visibility.Visible;
             OfficeWorkerList.Visibility = Visibility.Collapsed;
-            //_isOfficeWorkerListVisibly = false;
+            _isOfficeWorkerListVisibly = false;
             OfficeWorkerButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#586875"));
             RemoteWorekerButton.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#d6d7da"));
+        }
+        private void OpenEditingEmployeeWindow(object sender, RoutedEventArgs eventArgs)
+        {
+            Employee employee = null;
+            if (_isOfficeWorkerListVisibly == true)
+                employee = (Employee)OfficeWorkerList.SelectedItem;
+            else
+                employee = (Employee)RemoteWorkersList.SelectedItem;
+            EditEmployeeViewModel editingEmployee = new EditEmployeeViewModel(employee);
+            editingEmployee.ExcitationException += DisplayExceptionMessage;
+            editingEmployee.ClosingAllModalWindows += CloseAllModalWindows;
+            editingEmployee.EditingEmployee += EditEmployee;
+            DialogHost.Show(editingEmployee, "RootDialog");
+        }
+        private void EditEmployee(Employee employee, bool isChangeTypeWorker)
+        {
+            if (isChangeTypeWorker == false)
+                return;
+
+            if (employee.TypeWorkerByLocation == "Office worker")
+            {
+                App.MainViewModel.RemoteWorkers.Remove(employee);
+                App.MainViewModel.OfficeWorkers.Add(employee);
+            }
+            else if(employee.TypeWorkerByLocation == "Remote worker")
+            {
+                App.MainViewModel.OfficeWorkers.Remove(employee);
+                App.MainViewModel.RemoteWorkers.Add(employee);
+            }
+        }
+        private void OpenDetailsEmployeeWindow(object sender, RoutedEventArgs eventArgs)
+        {
+            Employee employee = null;
+            if (_isOfficeWorkerListVisibly == true)
+                employee = (Employee)OfficeWorkerList.SelectedItem;
+            else
+                employee = (Employee)RemoteWorkersList.SelectedItem;
+            DetailsEmployeeViewModel detailsEmployee = new DetailsEmployeeViewModel(employee);
+            DialogHost.Show(detailsEmployee, "RootDialog");
+        }
+        private async void OpeneDeleteEmployeeWindow(object sender, RoutedEventArgs eventArgs)
+        {
+            Employee employee = null;
+            if (_isOfficeWorkerListVisibly == true)
+                employee = (Employee)OfficeWorkerList.SelectedItem;
+            else
+                employee = (Employee)RemoteWorkersList.SelectedItem;
+            DeleteEmployeeViewModel deletingModalWindow = new DeleteEmployeeViewModel(employee);
+            deletingModalWindow.RemovingEmployee += DeleteEmployee;
+            deletingModalWindow.ClosingAllModalWindows += CloseAllModalWindows;
+            await DialogHost.Show(deletingModalWindow, "RootDialog");
+        }
+        private void DeleteEmployee(Employee employee)
+        {
+            if (_isOfficeWorkerListVisibly == true)
+                App.MainViewModel.OfficeWorkers.Remove(employee);
+            else
+               App.MainViewModel.RemoteWorkers.Remove(employee);
+            App.MainViewModel.OnPropertyChanged("AmountEmployee");
         }
     }
 }
