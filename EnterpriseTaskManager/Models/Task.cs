@@ -20,6 +20,18 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private string _taskName;
+        public string Description
+        {
+            get => _description;
+            set
+            {
+                if (_description == value)
+                    return;
+                _description = value;
+                OnPropertyChanged("Description");
+            }
+        }
+        private string _description;
         public TaskStatus TaskStatus
         {
             get => _taskStatus;
@@ -46,8 +58,29 @@ namespace EnterpriseTaskManager.Models
         }
         private TaskCategory _taskCategory;
         public int TaskCategoryId { get; set; }
-        public BindingList<Employee> ResponsibleEmployees { get; set; }
-       
+        public Employee CheifEmployee 
+        {
+            get => _cheifEmployee;
+            set
+            {
+                if (_cheifEmployee == value)
+                    return;
+                _cheifEmployee = value;
+                OnPropertyChanged("CheifEmployee");
+            }
+        }
+        private Employee _cheifEmployee;
+        public Task() 
+        {
+        }
+        public Task(string taskName, string description, TaskStatus taskStatus, TaskCategory taskCategory, Employee cheifEmployee)
+        {
+            TaskName = taskName;
+            Description = description;
+            TaskStatus = taskStatus;
+            TaskCategory = taskCategory;
+            CheifEmployee = cheifEmployee;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {

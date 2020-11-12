@@ -23,8 +23,11 @@ namespace EnterpriseTaskManager.Views
             this.DataContext = App.MainViewModel;
             AddPositionButton.MouseLeftButtonUp += OpenModalWindowAdditingPosition;
             AddEmployeeButton.MouseLeftButtonUp += OpenModalWindowAdditingEmployee;
+            AddTaskButton.MouseLeftButtonUp += OpenAddTaskWindow;
+            AddTaskStatusButton.MouseLeftButtonUp += OpenAddTaskStatus;
+            AddTaskCategoryButton.MouseLeftButtonUp += OpenAddTaskCategory;
         }
-        private void OpenModalWindowAdditingPosition(object sender, MouseButtonEventArgs e)
+        private void OpenModalWindowAdditingPosition(object sender, MouseButtonEventArgs eventArgs)
         {
             AddPositionViewModel addPositionViewModel = new AddPositionViewModel();
             addPositionViewModel.ClosingAllModalWindows += CloseAllModalWindows;
@@ -135,6 +138,58 @@ namespace EnterpriseTaskManager.Views
             else
                App.MainViewModel.RemoteWorkers.Remove(employee);
             App.MainViewModel.OnPropertyChanged("AmountEmployee");
+        }
+        private void OpenAddTaskWindow(object sender, MouseButtonEventArgs eventArgs)
+        {
+            AddTaskViewModel addTaskViewModel = new AddTaskViewModel();
+            addTaskViewModel.ExcitationException += DisplayExceptionMessage;
+            addTaskViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            DialogHost.Show(addTaskViewModel, "RootDialog");
+        }
+        private void OpenAddTaskStatus(object sender, MouseButtonEventArgs eventArgs)
+        {
+            AddTaskStatusViewModel addTaskStatusViewModel = new AddTaskStatusViewModel();
+            addTaskStatusViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            addTaskStatusViewModel.ExcitationException += DisplayExceptionMessage;
+            DialogHost.Show(addTaskStatusViewModel, "RootDialog");
+        }
+        private void OpenAddTaskCategory(object sender, MouseButtonEventArgs eventArgs)
+        {
+            AddTaskCategoryViewModel addTaskCategoryViewModel = new AddTaskCategoryViewModel();
+            addTaskCategoryViewModel.ExcitationException += DisplayExceptionMessage;
+            addTaskCategoryViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            DialogHost.Show(addTaskCategoryViewModel, "RootDialog");
+        }
+        private void OpenEditTaskWindow(object sender, RoutedEventArgs eventArgs)
+        {
+            Task task = (Task)ListViewTasks.SelectedItem;
+            if (task == null)
+                return;
+            EditingTaskViewModel editingTaskViewModel = new EditingTaskViewModel(task);
+            editingTaskViewModel.ExcitationException += DisplayExceptionMessage;
+            editingTaskViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            DialogHost.Show(editingTaskViewModel, "RootDialog");
+        }
+        private void OpenDeleteTaskWindow(object sender, RoutedEventArgs eventArgs)
+        {
+            Task task = (Task)ListViewTasks.SelectedItem;
+            if (task == null)
+                return;
+            DeleteTaskViewModel deleteTaskViewModel = new DeleteTaskViewModel(task);
+            deleteTaskViewModel.ExcitationException += DisplayExceptionMessage;
+            deleteTaskViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            DialogHost.Show(deleteTaskViewModel, "RootDialog");
+        }
+        private void OpenTaskDetailViewModel(object sender, RoutedEventArgs eventArgs)
+        {
+            Task task = (Task)ListViewTasks.SelectedItem;
+            if (task == null)
+                return;
+            DetailsTaskViewModel detailsTaskViewModel = new DetailsTaskViewModel(task);
+            detailsTaskViewModel.ExcitationException += DisplayExceptionMessage;
+            detailsTaskViewModel.ClosingAllModalWindows += CloseAllModalWindows;
+            DialogHost.Show(detailsTaskViewModel, "RootDialog");
+
         }
     }
 }

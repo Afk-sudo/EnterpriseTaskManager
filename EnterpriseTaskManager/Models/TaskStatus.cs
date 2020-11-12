@@ -17,11 +17,16 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private string _statusName;
-
+        public TaskStatus() { }
+        public TaskStatus(string statusName) 
+        {
+            StatusName = statusName;
+        }
         public event PropertyChangedEventHandler PropertyChanged;
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public override string ToString() => StatusName;
     }
 }

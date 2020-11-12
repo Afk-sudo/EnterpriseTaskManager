@@ -291,6 +291,164 @@
                 <Button Content="Continue"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 20" Command="{Binding DeleteEmployeeCommand}" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
             </Grid>
         </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:AddTaskViewModel}">
+            <Grid Height="580" Width="600" Background="#22272b">
+                <Grid VerticalAlignment="Top" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0" Margin="20" FontSize="18"  HorizontalAlignment="Left" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <Grid VerticalAlignment="Top"  Margin="0 80 0 0">
+                    <Grid>
+                        <TextBlock Text="Task Information" FontSize="18" Foreground="#aeafb4" HorizontalAlignment="Center"/>
+                        <DockPanel  Width="500" Margin="0 50 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="80">
+                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Left" >
+                                <TextBlock Foreground="#aeafb4" Text="Task name *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding TaskName}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical"  Margin="50 0">
+                                <TextBlock Foreground="#aeafb4" Text="Task description *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding Description}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>                            
+                        </DockPanel>
+                        <DockPanel Width="500" Margin="0 150 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="80">
+                            <StackPanel Orientation="Vertical" >
+                                <TextBlock Foreground="#aeafb4" Text="Task category *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding TaskCategory}" ItemsSource="{Binding TasksCategoryes}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                            <StackPanel  Orientation="Vertical" Width="200">
+                                <TextBlock Foreground="#aeafb4" Text="Task status *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding TaskStatus}" ItemsSource="{Binding TasksStatuses}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                        </DockPanel>
+                        <TextBlock Text="Responsible employees" FontSize="18" Margin="0 240 0 0" Foreground="#aeafb4" HorizontalAlignment="Center"/>
+                        <DockPanel Margin="0 300 0 0 " Width="500" Height="auto">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Foreground="#aeafb4" Text="Chief employee *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding CheifEmployee}" ItemsSource="{Binding Employees}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                        </DockPanel>                           
+                        <Button Content="Add" Command="{Binding AddTaskCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 410 50 0" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:AddTaskCategoryViewModel}">
+            <Grid Height="240" Width="400" Background="#22272b">
+                <Grid VerticalAlignment="Top" Height="50" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0"  FontSize="18" HorizontalAlignment="Left" Margin="20 0 0 0 " VerticalAlignment="Center" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" Margin="20 80 0 0" VerticalAlignment="Top" >
+                    <TextBlock Foreground="#aeafb4" Text="Category name *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                    <TextBox Text="{Binding CategoryName}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                </StackPanel>
+                <Button Content="Add" Command="{Binding AddTaskCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="0 0 20 30"  Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:AddTaskStatusViewModel}">
+            <Grid Height="240" Width="400" Background="#22272b">
+                <Grid VerticalAlignment="Top" Height="50" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0"  FontSize="18" HorizontalAlignment="Left" Margin="20 0 0 0 " VerticalAlignment="Center" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <StackPanel  Orientation="Vertical" HorizontalAlignment="Center" Margin="20 80 0 0" VerticalAlignment="Top" >
+                    <TextBlock Foreground="#aeafb4" Text="Status name *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                    <TextBox Text="{Binding StatusName}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                </StackPanel>
+                <Button Content="Add" Command="{Binding AddTaskStatusCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom"  Margin="0 0 20 30"  Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:EditingTaskViewModel}">
+            <Grid Height="580" Width="600" Background="#22272b">
+                <Grid VerticalAlignment="Top" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0" Margin="20" FontSize="18"  HorizontalAlignment="Left" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <Grid VerticalAlignment="Top"  Margin="0 80 0 0">
+                    <Grid>
+                        <TextBlock Text="Task Information" FontSize="18" Foreground="#aeafb4" HorizontalAlignment="Center"/>
+                        <DockPanel  Width="500" Margin="0 50 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="80">
+                            <StackPanel  Orientation="Vertical" HorizontalAlignment="Left" >
+                                <TextBlock Foreground="#aeafb4" Text="Task name *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding TaskName}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical"  Margin="50 0">
+                                <TextBlock Foreground="#aeafb4" Text="Task description *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <TextBox Text="{Binding Description}" Style="{StaticResource TextBox}" Foreground="#aeafb4" Width="200" Height="35" Padding="5 0 " Margin="0 5"/>
+                            </StackPanel>
+                        </DockPanel>
+                        <DockPanel Width="500" Margin="0 150 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" Height="80">
+                            <StackPanel Orientation="Vertical" >
+                                <TextBlock Foreground="#aeafb4" Text="Task category *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding TaskCategory}" ItemsSource="{Binding TasksCategoryes}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                            <StackPanel  Orientation="Vertical" Width="200">
+                                <TextBlock Foreground="#aeafb4" Text="Task status *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding TaskStatus}" ItemsSource="{Binding TasksStatuses}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                        </DockPanel>
+                        <TextBlock Text="Responsible employees" FontSize="18" Margin="0 240 0 0" Foreground="#aeafb4" HorizontalAlignment="Center"/>
+                        <DockPanel Margin="0 300 0 0 " Width="500" Height="auto">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Foreground="#aeafb4" Text="Chief employee *" FontWeight="DemiBold"  Width="200" Height="25"  />
+                                <ComboBox SelectedItem="{Binding CheifEmployee}" ItemsSource="{Binding Employees}" Foreground="#aeafb4" BorderThickness="0 0 0 0" Padding="5 5 0 0" Background="#2c343a" Width="200" Height="35" Margin="0 5 0 0 "/>
+                            </StackPanel>
+                        </DockPanel>
+                        <Button Content="Add" Command="{Binding EditTaskCommand}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 410 50 0" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:DeleteTaskViewModel}">
+            <Grid Height="220" Width="400" Background="#22272b">
+                <Grid VerticalAlignment="Top" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0" Margin="20" FontSize="18"  HorizontalAlignment="Left" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <TextBlock Text="Are you sure you want to delete this task ?" Margin="20 100 0 0" FontSize="14" Foreground="#aeafb4"/>
+                <Button Content="Continue"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0 0 40 20" Command="{Binding DeleteTaskCommand}" Width="100" Height="33" Background="#37d845" BorderBrush="#37d845"/>
+            </Grid>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type modalWindow:DetailsTaskViewModel}">
+            <Grid Height="580" Width="600" Background="#22272b">
+                <Grid VerticalAlignment="Top" Background="#16191c">
+                    <TextBlock Text="{Binding WindowName}" Foreground="#adafb0" Margin="20" FontSize="18"  HorizontalAlignment="Left" />
+                    <Button Command="{x:Static materialDisign:DialogHost.CloseDialogCommand}" MaxWidth="100" Height="auto" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Right">
+                        <materialDisign:PackIcon Kind="Close" Width="30" Height="30" Foreground="#adafb0"/>
+                    </Button>
+                </Grid>
+                <Grid VerticalAlignment="Top"  Margin="0 80 0 0">
+                    <Grid>
+                        <TextBlock Text="Task Information" FontSize="18" Foreground="#aeafb4" HorizontalAlignment="left" Margin="20 0"/>
+                        <StackPanel HorizontalAlignment="Left" Margin="20 60">
+                            <TextBlock Foreground="#aeafb4" Text="{Binding StringFormat='Name: {0}',Path=TaskName}" FontWeight="DemiBold"  Width="300" Height="25"  />
+                            <TextBlock Foreground="#aeafb4" Text="{Binding StringFormat='Description: {0}',Path=Description}" FontWeight="DemiBold"  Width="300" Height="25"  />
+                            <TextBlock Foreground="#aeafb4" Text="{Binding StringFormat='Category: {0}',Path=TaskCategory}" FontWeight="DemiBold"  Width="300" Height="25"  />
+                            <TextBlock Foreground="#aeafb4" Text="{Binding StringFormat='Status: {0}',Path=TaskStatus}" FontWeight="DemiBold"  Width="300" Height="25"  />
+                        </StackPanel>
+                        <TextBlock Text="Responsible employee" FontSize="18" Foreground="#aeafb4" HorizontalAlignment="Left" Margin="20 200 0 0"/>
+                        <DockPanel HorizontalAlignment="Left" Margin="20 260 0 0">
+                            <Image Source="{Binding CheifEmployee.PathToPhoto}" Width="100" Height="100" VerticalAlignment="top"/>
+                            <StackPanel Margin="10 0 0 0 " >
+                                <TextBlock  Text="{Binding CheifEmployee.FullName}" Foreground="#f9fafa" VerticalAlignment="Top" FontSize="16"/>
+                                <TextBlock Text="{Binding  Path = CheifEmployee.Position}" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
+                                <TextBlock Text="{Binding StringFormat='Date birth: {0:D}', Path = CheifEmployee.DateBirth}" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
+                            </StackPanel>
+                        </DockPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
     <Window.Triggers>
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="OpenGridMenu">
@@ -316,66 +474,55 @@
                 </DockPanel>
                 <ScrollViewer Width="Auto" Padding="0" VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto" Height="450" Margin="0 160 50 20" VerticalAlignment="Top">
                     <StackPanel Margin="20 0">
-                        <ItemsControl x:Name="ListViewProducts" ItemsSource="{Binding Tasks}">
-                            <ItemsControl.ItemTemplate>
+                        <ListView x:Name="ListViewTasks" ItemsSource="{Binding Tasks}">
+                            <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid Margin="0 15 20 20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="350" Height="400" Background="#2c343a">
+                                    <Grid  VerticalAlignment="Center" HorizontalAlignment="Center" Width="350" Height="400" Background="#2c343a">
                                         <Grid VerticalAlignment="Top" Height="100"  Margin="20 0 20 0">
                                             <Grid Height="80" Width="80" Background="#304394" VerticalAlignment="Top" HorizontalAlignment="Left">
                                                 <materialDisign:PackIcon HorizontalAlignment="Center" VerticalAlignment="Center" Kind="StateMachine" Foreground="#fff" Height="45" Width="45"/>
                                             </Grid>
                                             <Grid Height="75" Width="200" VerticalAlignment="Top" HorizontalAlignment="Right">
-                                                <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Width="100" VerticalAlignment="Center">
-                                                    <Label Content="38" FontSize="28" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
-                                                    <Label Content="Employeess" FontSize="13" Foreground="#73777b" HorizontalContentAlignment="Center"/>
-                                                </StackPanel>
                                                 <DockPanel HorizontalAlignment="Left" Width="100" VerticalAlignment="Center">
-                                                    <Label DockPanel.Dock="Top" Content="In process" FontSize="20" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
+                                                    <Label DockPanel.Dock="Top" Content="{Binding TaskStatus}" FontSize="20" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
                                                     <Label DockPanel.Dock="Bottom" Content="status" FontSize="13" Foreground="#73777b" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
+                                                </DockPanel>
+                                                <DockPanel HorizontalAlignment="Right" Width="100" VerticalAlignment="Center">
+                                                    <Label DockPanel.Dock="Top" Content="{Binding TaskCategory}" FontSize="20" Foreground="#d6d7da" HorizontalContentAlignment="Center"/>
+                                                    <Label DockPanel.Dock="Bottom" Content="category" FontSize="13" Foreground="#73777b" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
                                                 </DockPanel>
                                             </Grid>
                                         </Grid>
                                         <StackPanel VerticalAlignment="Top" Margin="0 130">
-                                            <TextBlock Margin="20 0 0 5" Text="Tesla motors" FontSize="15" Foreground="#a7b3bf"/>
-                                            <TextBlock Margin="20 0" 
-                            Text="Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-                                   "
-                                   FontSize="13" Foreground="#d6d7da" TextWrapping="Wrap"/>
+                                            <TextBlock Margin="20 0 0 5" Text="{Binding TaskName}" FontSize="15" Foreground="#a7b3bf"/>
+                                            <TextBlock Margin="20 0" Text="{Binding Description}" FontSize="13" Foreground="#d6d7da" TextWrapping="Wrap"/>
                                         </StackPanel>
                                         <Grid Width="310" VerticalAlignment="Bottom" HorizontalAlignment="Left" Height="70" Margin="20 0 0 20">
                                             <Border VerticalAlignment="top" BorderBrush="#4d545c" BorderThickness="0 0 0 1"  Margin="0 0 0 20"/>
                                             <StackPanel Height="50" VerticalAlignment="Bottom" Orientation="Horizontal">
-                                                <Image  Source="C:\Users\User\Desktop\Proects\icon4.png" Width="50" Height="50"/>
+                                                <Image  Source="{Binding CheifEmployee.PathToPhoto}" Width="50" Height="50"/>
                                                 <StackPanel Margin="10 0 0 0" >
-                                                    <TextBlock Text="Programmer" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
-                                                    <TextBlock  Text="Александра Энистон" Foreground="#f9fafa" VerticalAlignment="Top" FontSize="16"/>
-                                                    <!--<TextBlock.Text>
-                                            <MultiBinding StringFormat="{}{0} {1}">
-                                                <Binding Path="FirstName"/>
-                                                <Binding Path="LastName"/>
-                                            </MultiBinding>
-                                        </TextBlock.Text>
-                                    </TextBlock>-->
+                                                    <TextBlock Text="{Binding CheifEmployee.Position}" Foreground="#768591" FontSize="14" VerticalAlignment="Bottom"/>
+                                                    <TextBlock  Text="{Binding CheifEmployee.FullName}" Foreground="#f9fafa" VerticalAlignment="Top" FontSize="16"/>
                                                 </StackPanel>
-
                                             </StackPanel>
                                         </Grid>
                                     </Grid>
                                 </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
+                            </ListView.ItemTemplate>
+                            <ListView.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <WrapPanel/>
                                 </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                            <ItemsControl.ContextMenu>
+                            </ListView.ItemsPanel>
+                            <ListView.ContextMenu>
                                 <ContextMenu Background="#22272b" Foreground="#c9d5df">
-                                    <MenuItem Click="OpenDetailsEmployeeWindow" Header="Details"></MenuItem>
-                                    <MenuItem Click="OpenEditingEmployeeWindow" Header="Edit"></MenuItem>
-                                    <MenuItem Click="OpeneDeleteEmployeeWindow" Header="Delete"></MenuItem>
+                                    <MenuItem Click="OpenTaskDetailViewModel" Header="Details"></MenuItem>
+                                    <MenuItem Click="OpenEditTaskWindow" Header="Edit"></MenuItem>
+                                    <MenuItem Click="OpenDeleteTaskWindow" Header="Delete"></MenuItem>
                                 </ContextMenu>
-                            </ItemsControl.ContextMenu>
-                        </ItemsControl>
+                            </ListView.ContextMenu>
+                        </ListView>
                     </StackPanel>
                 </ScrollViewer>
                               
@@ -407,6 +554,18 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDisign:PackIcon Kind="Post" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
                                 <TextBlock Text="Add position" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="AddTaskStatusButton" Height="60" Foreground="#adafb0">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDisign:PackIcon Kind="Category" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="Add category" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="AddTaskCategoryButton" Height="60" Foreground="#adafb0">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDisign:PackIcon Kind="StateMachine" Height="20" Width="20" VerticalAlignment="Center" Margin="20 0"/>
+                                <TextBlock Text="Add status" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="20 10"/>
                             </StackPanel>
                         </ListViewItem>
                     </ListView>

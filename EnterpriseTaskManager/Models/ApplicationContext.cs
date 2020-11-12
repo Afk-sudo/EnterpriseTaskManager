@@ -7,6 +7,8 @@ namespace EnterpriseTaskManager.Models
         public DbSet<Task> Tasks { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<TaskCategory> TaskCategoryes { get; set; }
+        public DbSet<TaskStatus> TaskStatuses { get; set; }
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
             //Database.EnsureDeleted();

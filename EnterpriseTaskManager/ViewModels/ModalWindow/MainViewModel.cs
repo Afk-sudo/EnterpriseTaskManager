@@ -62,7 +62,7 @@ namespace EnterpriseTaskManager.ViewModels.ModalWindow
         {
             Tasks = new BindingList<Task>();
 
-            var tasks = App.Database.Tasks.Include(task => task.TaskStatus).Include(task => task.TaskCategory);
+            var tasks = App.Database.Tasks.Include(task => task.TaskStatus).Include(task => task.TaskCategory).Include(task => task.CheifEmployee);
             foreach(Task task in tasks)
             {
                 Tasks.Add(task);

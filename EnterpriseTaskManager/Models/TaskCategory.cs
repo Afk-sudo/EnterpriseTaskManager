@@ -22,9 +22,15 @@ namespace EnterpriseTaskManager.Models
         private string _categoryName;
         
         public event PropertyChangedEventHandler PropertyChanged;
+        public TaskCategory() { }
+        public TaskCategory(string categoryName) 
+        {
+            CategoryName = categoryName;
+        }
         private void OnPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public override string ToString() => CategoryName;
     }
 }

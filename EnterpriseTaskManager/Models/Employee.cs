@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace EnterpriseTaskManager.Models
@@ -42,6 +43,8 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private string _patronymic;
+        [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+        public string FullName => $"{FirstName} {LastName}";
         public string PathToPhoto
         {
             get => _pathToPhoto;
@@ -126,10 +129,10 @@ namespace EnterpriseTaskManager.Models
             }
         }
         private string _gender;
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public Employee()
         {
-
         }
         public Employee(string firstName, string lastName, string patronymic, DateTime dateBirth, string pathToPhoto, Position position, string typeWorkerByLocation, string gender)
         {
@@ -146,5 +149,6 @@ namespace EnterpriseTaskManager.Models
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+        public override string ToString() => $"{FirstName} {LastName} {Patronymic}";
     }
 }
